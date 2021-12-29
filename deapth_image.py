@@ -24,11 +24,16 @@ try:
         depth_image = np.asanyarray(depth_frame.get_data())
         color_image = np.asanyarray(color_frame.get_data())
 
+        #get depth scale from get_distance(x, y)
+        depth = frames.get_depth_frame()
+        distance = depth.get_distance(320, 240)
+
         depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.03), cv2.COLORMAP_JET)
         images = np.hstack((color_image, depth_colormap))
 
         cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
-        cv2.imshow('RealSense', images)
+        cv2.imshow('RealSense', color_image)
+        print("distance is :", distance)
 
         key = cv2.waitKey(1)
 
