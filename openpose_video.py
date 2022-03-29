@@ -1,15 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Dec 29 16:35:39 2021
-
-@author: sirius
-
-openpose + depth camera
-
-"""
-
-
+'''
+openpose with video, use cv2.VideoCapture(0)
+'''
 import cv2
 import numpy as np
 import argparse
@@ -38,14 +29,14 @@ inWidth = args.width
 inHeight = args.height
 
 
-net = cv2.dnn.readNetFromTensorflow("pb/graph_opt.pb")
+net = cv2.dnn.readNetFromTensorflow("/home/sirius/RL練習/Q-learning/pb/graph_opt.pb")
 
 #cap = cv2.VideoCapture(args.input if args.input else 0)
 #cap = cv2.VideoCapture('action.mp4')
 cap = cv2.VideoCapture(0)
 
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-#output = cv2.VideoWriter('output.avi', fourcc, 5.0, (int(cap.get(3)),int(cap.get(4))))
+output = cv2.VideoWriter('output.avi', fourcc, 5.0, (int(cap.get(3)),int(cap.get(4))))
 '''注意：在这部分若要调用摄像头进行实时图像检测并保存视频到本地，需要将上面三行的参数进行更改，并保证最终的保存视频的尺寸大小与输出图像大小相同。'''
 while True:
     hasFrame, frame = cap.read()
@@ -92,7 +83,7 @@ while True:
     cv2.putText(frame, '%.2fms' % (t / freq), (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0))
 
     cv2.imshow('OpenPose using OpenCV', frame)
-    #output.write(frame)
+    output.write(frame)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break

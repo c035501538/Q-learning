@@ -5,6 +5,7 @@
     @Author : panjq
     @E-mail : pan_jinquan@163.com
     @Date   : 2019-07-29 21:50:17
+    image
 """
  
 import cv2 as cv
@@ -80,6 +81,6 @@ if __name__ == "__main__":
     model_path = "/home/sirius/RL練習/Q-learning/pb/graph_opt.pb"
     # image_path = "body/*.jpg"
     out_dir = "./result"
-    # detect_image_list_key_point(image_path,out_dir)
-    image_path = "/home/sirius/RL練習/Q-learning/test.jpg"
+    image_path = "/home/sirius/RL練習/Q-learning/77.jpg"
+    #detect_image_list_key_point(image_path,out_dir)
     detect_key_point(model_path, image_path, out_dir, inWidth=368, inHeight=368, threshhold=0.05)

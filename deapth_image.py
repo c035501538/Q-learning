@@ -1,3 +1,14 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Dec 29 16:35:39 2021
+
+@author: sirius
+
+deapth camera using with realsense2
+
+"""
+
 import pyrealsense2 as rs 
 import numpy as np
 import cv2
@@ -32,7 +43,7 @@ try:
         images = np.hstack((color_image, depth_colormap))
 
         cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
-        cv2.imshow('RealSense', color_image)
+        cv2.imshow('RealSense', images)
         print("distance is :", distance)
 
         key = cv2.waitKey(1)

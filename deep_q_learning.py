@@ -329,19 +329,26 @@ class DeepQNetwork:
             
     def pay(self):
         self.train()
+        '''輸出Q-table'''
+        for index in range(5):
+            print(index)
+            start_room = index
+            current_state = start_room
+            out_result = self.session.run(self.q_eval, feed_dict={self.q_eval_input: self.state_list[current_state:current_state + 1]})
+            print(out_result)
         
         for index in range(5):
             start_state = index
             if start_state == 0:
-                print("start-state: 遠揮 ",start_state, "#############################")
+                print("start-state: Target standing in the distance and waving hand")
             elif start_state == 1:
-                print("start-state: 遠0 ",start_state, "#############################")
+                print("start-state: Target standing in the distance ")
             elif start_state == 2:
-                print("start-state: 靠近中 ",start_state, "#############################")
+                print("start-state: Target approaching ")
             elif start_state ==3:
-                print("start-state: 面前 ",start_state, "#############################")
+                print("start-state: Target stand in front of the robot ")
             elif start_state ==4:
-                print("start-state: 路過 ",start_state, "#############################")
+                print("start-state: Target passing ")
 
             #print("start-state:",start_state, "#############################")
             current_state = start_state
@@ -355,11 +362,11 @@ class DeepQNetwork:
 
                 action = np.argmax(out_result)
                 if action == 0:
-                    print("state", current_state, "靠近")
+                    print("state", current_state, "Robot need to closing target 0")
                 elif action == 1:
-                    print("state", current_state, "不動")
+                    print("state", current_state, "Robot need to stop 1")
                 elif action == 2:
-                    print("state", current_state, "問")
+                    print("state", current_state, "Robot need to ask question 2")
 
                 #print("state", current_state, "action", action)
 
